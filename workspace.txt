@@ -1,0 +1,52 @@
+Workspace
+=========
+
+
+Class Alias Proposal
+--------------------
+
+http://repetae.net/recent/out/classalias.html
+
+oldest, ~2007
+
+Problem:
+if you split a class into two, every instance has to change
+type signatures will have to be rewritten
+
+>  class Foo a where
+>    foo :: a -> Bool
+>    foo x = False
+>
+>  class Bar b where
+>    bar :: Int -> b -> [b]
+>
+>  class alias FooBar a = (Foo a, Bar a) where
+>    foo = ... -- specific implementation hiding default one
+
+With this proposal you can split a class and alias the old one
+without affecting other code which uses the old one
+
+TODO: resolving alias instantiation vs. separate instantiation
+
+TODO: Aliases need to have different names, thus something like
+Monad and Monad_ would by neccessary, which is not desirable
+
+
+Superclass defaults
+-------------------
+
+http://www.haskell.org/haskellwiki/Superclass_defaults
+
+enriches instance syntax:
+
+> instance (Class1 a, Class2 a, ...) where ...
+
+Class1, Class2 forms a DAG (in proposal is the DAG connected, must be?)
+
+besides incorporates above mentioned class aliases
+
+
+Class system extension proposal
+------------------------------
+http://www.haskell.org/haskellwiki/Class_system_extension_proposal
+
